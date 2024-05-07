@@ -1,0 +1,48 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!-- A unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>tr.xyz.Folder</id>
+
+    <!-- Public plugin name should be written in Title Case.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+    <name>Kotlin Collapse</name>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor email="hsyntr33@gmail.com"/>
+
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+    <description><![CDATA[
+    Collapses automatically noisy folding regions in a Kotlin file.
+    The collapsing is done when a project is opened or first opening a file.
+    And there is a shortcut (default <strong>alt C</strong>) to collapse that folding region at any time.
+    Closed regions are classes, functions, properties (getter/setter), initializers (init), and object declarations.
+   <code>if/else</code> is not collapsed. Shortcut is <strong>alt C</strong>.
+  ]]></description>
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+        <postStartupActivity implementation="tr.xyz.folder.MainClass"/>
+    </extensions>
+
+    <actions>
+        <action class="tr.xyz.folder.MainClass"
+                description="Collapse kotlin regions"
+                text="Collapse Kotlin Regions"
+                id="tr.xyz.folder.MainClass">
+            <keyboard-shortcut keymap="$default" first-keystroke="alt C"/>
+        </action>
+    </actions>
+
+    <projectListeners>
+        <listener
+                class="tr.xyz.folder.MainClass"
+                topic="com.intellij.openapi.project.ProjectManagerListener"/>
+    </projectListeners>
+</idea-plugin>
