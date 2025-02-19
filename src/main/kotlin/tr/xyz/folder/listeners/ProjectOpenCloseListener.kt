@@ -17,7 +17,7 @@ class ProjectOpenCloseListener : com.intellij.openapi.startup.ProjectActivity, D
 	override suspend fun execute(project: Project) { // projectOpened yerine execute ve suspend
 		val fileEditorManager = FileEditorManager.getInstance(project)
 		
-		// Dosya açılışlarını dinle
+		// listen for file opened
 		project.messageBus.connect().subscribe(
 			FileEditorManagerListener.FILE_EDITOR_MANAGER,
 			object : FileEditorManagerListener {
@@ -25,7 +25,7 @@ class ProjectOpenCloseListener : com.intellij.openapi.startup.ProjectActivity, D
 					val psiFile = PsiUtilCore.getPsiFile(project, file)
 					EditorFactory.getInstance().allEditors.forEach { editor ->
 						if (psiFile.language.displayName == "Kotlin") {
-							ApplicationManager.getApplication().runReadAction { // Burayı ekle
+							ApplicationManager.getApplication().runReadAction {
 								foldingStrategy.collapse(editor, psiFile)
 							}
 						}

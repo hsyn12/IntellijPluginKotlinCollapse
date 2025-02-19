@@ -15,8 +15,8 @@ import kotlinx.coroutines.launch
 import tr.xyz.folder.folding.KotlinFoldingStrategy
 
 class StartupActivity : ProjectActivity, DumbAware { // StartupActivity yerine ProjectActivity
-	
 	private val foldingStrategy = KotlinFoldingStrategy()
+	
 	override suspend fun execute(project: Project) {
 		CoroutineScope(Dispatchers.Main).launch { // Coroutine içinde
 			val fileEditorManager = FileEditorManager.getInstance(project)
