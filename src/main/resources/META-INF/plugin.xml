@@ -3,9 +3,10 @@
 	<name>Kotlin Collapse</name>
 	<vendor email="hsyntr33@gmail.com"/>
 	<description><![CDATA[
-    Collapses automatically noisy folding regions in a Kotlin file.
+    Collapses noisy folding regions in a Kotlin file.
     You can configure which regions to collapse in the settings.
-  ]]></description>
+    Default shortcut: <code>alt+C</code>
+    ]]></description>
 	
 	<depends>com.intellij.modules.platform</depends>
 	<depends>org.jetbrains.kotlin</depends>
@@ -20,6 +21,11 @@
 				displayName="Kotlin Collapse"/>
 	</extensions>
 	
+	<extensions defaultExtensionNs="org.jetbrains.kotlin">
+		<supportsKotlinPluginMode supportsK2="true"/>
+	</extensions>
+	
+	
 	<actions>
 		<action class="tr.xyz.folder.actions.CollapseAction"
 		        description="Collapse kotlin regions"
@@ -28,10 +34,4 @@
 			<keyboard-shortcut keymap="$default" first-keystroke="alt C"/>
 		</action>
 	</actions>
-	
-	<!--	<projectListeners>
-			<listener class="tr.xyz.folder.listeners.ProjectOpenCloseListener"
-						 topic="com.intellij.openapi.project.ProjectManagerListener"/>
-		</projectListeners>-->
-
 </idea-plugin>

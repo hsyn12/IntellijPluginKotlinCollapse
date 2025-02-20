@@ -1,12 +1,15 @@
 // src/main/kotlin/tr/xyz/folder/actions/CollapseAction.kt
 package tr.xyz.folder.actions
 
+import com.intellij.openapi.actionSystem.ActionUpdateThread
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import tr.xyz.folder.folding.KotlinFoldingStrategy
 
 class CollapseAction : AnAction() {
+	
+	override fun getActionUpdateThread(): ActionUpdateThread = ActionUpdateThread.BGT
 	
 	private val foldingStrategy = KotlinFoldingStrategy()
 	

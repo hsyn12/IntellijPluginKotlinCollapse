@@ -2,7 +2,6 @@
 
 package tr.xyz.folder
 
-import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.editor.EditorFactory
 import com.intellij.openapi.fileEditor.FileEditorManager
 import com.intellij.openapi.project.DumbAware
@@ -12,6 +11,7 @@ import com.intellij.psi.PsiDocumentManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import tr.xyz.folder.dev.readAction
 import tr.xyz.folder.folding.KotlinFoldingStrategy
 
 class StartupActivity : ProjectActivity, DumbAware { // StartupActivity yerine ProjectActivity
@@ -23,7 +23,7 @@ class StartupActivity : ProjectActivity, DumbAware { // StartupActivity yerine P
 			EditorFactory.getInstance().allEditors.forEach { editor ->
 				val psiFile = PsiDocumentManager.getInstance(project).getPsiFile(editor.document) ?: return@forEach
 				if (psiFile.language.displayName == "Kotlin") {
-					ApplicationManager.getApplication().runReadAction {
+					readAction {
 						foldingStrategy.collapse(editor, psiFile)
 					}
 				}
