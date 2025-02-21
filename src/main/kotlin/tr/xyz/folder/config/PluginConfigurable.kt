@@ -21,10 +21,10 @@ class PluginConfigurable : Configurable {
 	private val REGIONS = arrayOf(
 		"FUN", "PROPERTY_ACCESSOR", "OBJECT_DECLARATION", "CLASS_INITIALIZER",
 		"VALUE_ARGUMENT_LIST", "PROPERTY", "CLASS", "INTERFACE", "ENUM", "ANNOTATION",
-		"TYPE_ALIAS", "CONSTRUCTOR", "GETTER", "SETTER", "FIELD"
+		"TYPE_ALIAS", "CONSTRUCTOR", "GETTER", "SETTER", "FIELD", "FUNCTION_LITERAL"
 	)
 	
-	private val regionCheckBoxes = mutableMapOf<String, JBCheckBox>() // Checkbox'ları saklamak için
+	private val regionCheckBoxes = mutableMapOf<String, JBCheckBox>()
 	
 	override fun getDisplayName(): String {
 		return "Kotlin Collapse"
@@ -34,9 +34,8 @@ class PluginConfigurable : Configurable {
 		enabledCheckBox = JBCheckBox("Enable Kotlin Collapse", settings.enabled)
 		
 		regionsPanel = JPanel()
-		regionsPanel.layout = BoxLayout(regionsPanel, BoxLayout.Y_AXIS) // Dikey düzen
+		regionsPanel.layout = BoxLayout(regionsPanel, BoxLayout.Y_AXIS)
 		
-		// Her bir bölge için bir CheckBox oluştur
 		REGIONS.forEach { region ->
 			val checkBox = JBCheckBox(region, settings.regionsToCollapse.contains(region))
 			regionCheckBoxes[region] = checkBox
@@ -52,7 +51,6 @@ class PluginConfigurable : Configurable {
 		mainPanel.border = JBUI.Borders.empty(10)
 		return mainPanel
 	}
-	
 	
 	override fun isModified(): Boolean {
 		return enabledCheckBox.isSelected != settings.enabled || regionCheckBoxes.any { (region, checkBox) ->

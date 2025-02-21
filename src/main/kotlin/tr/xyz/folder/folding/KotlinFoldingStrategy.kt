@@ -17,6 +17,9 @@ class KotlinFoldingStrategy {
 		val settings = PluginSettings.getInstance()
 		if (!settings.enabled) return
 		
+		val t = run {
+			6
+		}
 		val regionsToCollapse = settings.regionsToCollapse
 		
 		ApplicationManager.getApplication().runReadAction {

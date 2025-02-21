@@ -12,10 +12,9 @@ import com.intellij.util.xmlb.XmlSerializerUtil
 	storages = [Storage("KotlinCollapseSettings.xml")]
 )
 class PluginSettings : PersistentStateComponent<PluginSettings> {
-	
 	var regionsToCollapse: List<String> = listOf(
 		"FUN", "PROPERTY_ACCESSOR", "OBJECT_DECLARATION",
-		"CLASS_INITIALIZER", "VALUE_ARGUMENT_LIST", "PROPERTY"
+		"CLASS_INITIALIZER", "VALUE_ARGUMENT_LIST", "PROPERTY", "FUNCTION_LITERAL"
 	)
 	var typesToCollapse: List<String> = listOf("CLASS", "object")
 	var enabled: Boolean = true
