@@ -19,14 +19,18 @@ class StartupActivity : ProjectActivity, DumbAware { // StartupActivity yerine P
 	
 	override suspend fun execute(project: Project) {
 		CoroutineScope(Dispatchers.Main).launch { // Coroutine içinde
-			val fileEditorManager = FileEditorManager.getInstance(project)
-			EditorFactory.getInstance().allEditors.forEach { editor ->
-				val psiFile = PsiDocumentManager.getInstance(project).getPsiFile(editor.document) ?: return@forEach
-				if (psiFile.language.displayName == "Kotlin") {
-					readAction {
-						foldingStrategy.collapse(editor, psiFile)
+			try {
+				val fileEditorManager = FileEditorManager.getInstance(project)
+				EditorFactory.getInstance().allEditors.forEach { editor ->
+					val psiFile = PsiDocumentManager.getInstance(project).getPsiFile(editor.document) ?: return@forEach
+					if (psiFile.language.displayName == "Kotlin") {
+						readAction {
+							foldingStrategy.collapse(editor, psiFile)
+						}
 					}
 				}
+			}
+			catch (_: Exception) {
 			}
 		}
 	}
